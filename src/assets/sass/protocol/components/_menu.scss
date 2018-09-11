@@ -67,7 +67,6 @@
     }
 
     &.mzp-has-drop-down .mzp-c-menu-title {
-        cursor: default;
         text-decoration: none;
 
         &:before {
@@ -98,6 +97,7 @@
 
         .mzp-c-menu-title {
             border-bottom: none;
+            cursor: default;
             padding: 0 $spacing-sm $spacing-lg;
         }
 
@@ -161,7 +161,7 @@
 
 // Enhanced hover interactions with JavaScript enabled.
 .js .mzp-c-menu-category {
-    &.selected {
+    &.is-selected {
         .mzp-c-menu-title:before {
             transform: rotate(45deg);
         }
@@ -172,13 +172,13 @@
     }
 
     @media #{$mq-md} {
-        &.animate {
+        &.is-animated {
             .mzp-c-menu-panel,
             .mzp-c-menu-title:after {
                 @include animation(mzp-a-fade-in 80ms ease-in 0ms 1 normal both);
             }
         }
-        &.selected {
+        &.is-selected {
             .mzp-c-menu-title {
                 @include highlighted;
                 z-index: 101;
@@ -203,12 +203,13 @@
     padding-top: $spacing-lg;
     width: 100%;
 
-    // Close button is only vivible for large screens.
+    // Close button is only visible for large screens.
     .mzp-c-menu-button-close {
         @include image-replaced;
         @include transition(transform 100ms ease-in-out);
         background: transparent url('#{$image-path}/icons/ui/close-black.svg') center center no-repeat;
         border: none;
+        cursor: pointer;
         display: none;
         height: 16px;
         padding: 0;
@@ -245,7 +246,6 @@
         @include border-box;
         margin: 0 auto;
         max-width: $content-max;
-        min-width: $content-xs;
         padding: 0;
         position: relative;
 

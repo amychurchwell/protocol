@@ -23,13 +23,13 @@ if (typeof Mozilla === 'undefined') {
         e.preventDefault();
 
         // Update button state
-        e.target.classList.toggle('active');
+        e.target.classList.toggle('is-active');
 
         // Update menu state
-        menu.classList.toggle('open');
+        menu.classList.toggle('is-open');
 
         // Update aria-expended state on menu.
-        var expanded = menu.classList.contains('open') ? true : false;
+        var expanded = menu.classList.contains('is-open') ? true : false;
         menu.setAttribute('aria-expanded', expanded);
 
         if (expanded) {
@@ -57,6 +57,7 @@ if (typeof Mozilla === 'undefined') {
         menu = document.querySelector('.mzp-c-navigation-items');
         if (menu) {
             document.querySelector('.mzp-c-navigation-menu-button').addEventListener('click', Navigation.onClick, false);
+            Navigation.setAria();
         }
     };
 
@@ -74,7 +75,6 @@ if (typeof Mozilla === 'undefined') {
         }
 
         Navigation.bindEvents();
-        Navigation.setAria();
     };
 
     window.Mozilla.Navigation = Navigation;

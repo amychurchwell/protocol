@@ -45,14 +45,14 @@ describe('protocol-navigation.js', function() {
             });
             button.click();
 
-            expect(menu.classList.contains('open')).toBeTruthy();
-            expect(button.classList.contains('active')).toBeTruthy();
+            expect(menu.classList.contains('is-open')).toBeTruthy();
+            expect(button.classList.contains('is-active')).toBeTruthy();
             expect(options.open).toHaveBeenCalled();
 
             button.click();
 
-            expect(menu.classList.contains('open')).toBeFalsy();
-            expect(button.classList.contains('active')).toBeFalsy();
+            expect(menu.classList.contains('is-open')).toBeFalsy();
+            expect(button.classList.contains('is-active')).toBeFalsy();
             expect(options.close).toHaveBeenCalled();
         });
     });

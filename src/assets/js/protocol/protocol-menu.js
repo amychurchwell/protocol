@@ -11,6 +11,7 @@ if (typeof Mozilla === 'undefined') {
     'use strict';
 
     var Menu = {};
+    var _menuOpen = false;
     var _hoverTimeout;
     var _hoverTimeoutDelay = 150;
     var _mqWideNav;
@@ -29,12 +30,14 @@ if (typeof Mozilla === 'undefined') {
      */
     Menu.open = function(el, animate) {
         if (animate) {
-            el.classList.add('animate');
+            el.classList.add('is-animated');
         }
 
-        el.classList.add('selected');
-        el.setAttribute('aria-selected', true);
-        el.setAttribute('aria-expanded', true);
+        el.classList.add('is-selected');
+
+        _menuOpen = true; // For checking menu state on keyup.
+
+        el.querySelector('.mzp-c-menu-title').setAttribute('aria-expanded', true);
 
         if (typeof _options.onMenuOpen === 'function') {
             _options.onMenuOpen(el);
@@ -46,20 +49,27 @@ if (typeof Mozilla === 'undefined') {
      * Note: on small screens more than one menu can be open at the same time.
      */
     Menu.close = function() {
-        var current = document.querySelectorAll('.mzp-c-menu-category.selected');
+        var current = document.querySelectorAll('.mzp-c-menu-category.is-selected');
 
         for (var i = 0; i < current.length; i++) {
-            current[i].classList.remove('animate');
-            current[i].classList.remove('selected');
-            current[i].setAttribute('aria-selected', false);
-            current[i].setAttribute('aria-expanded', false);
+            current[i].classList.remove('is-animated');
+            current[i].classList.remove('is-selected');
+            current[i].querySelector('.mzp-c-menu-title').setAttribute('aria-expanded', false);
         }
+
+        _menuOpen = false; // For checking menu state on keyup.
 
         if (typeof _options.onMenuClose === 'function' && current.length > 0) {
             _options.onMenuClose();
         }
 
         return current.length > 0;
+    };
+
+    Menu.onDocumentKeyUp = function(e) {
+        if (e.keyCode === 27 && _menuOpen) {
+            Menu.close();
+        }
     };
 
     /**
@@ -81,12 +91,18 @@ if (typeof Mozilla === 'undefined') {
      * @param {Object} el - DOM element (`.mzp-c-menu-category.mzp-js-expandable`)
      */
     Menu.toggle = function(el) {
-        var state = el.classList.contains('selected') ? true : false;
+        var state = el.classList.contains('is-selected') ? true : false;
 
         if (!state) {
             Menu.open(el);
         } else {
-            Menu.close();
+            el.classList.remove('is-animated');
+            el.classList.remove('is-selected');
+            el.querySelector('.mzp-c-menu-title').setAttribute('aria-expanded', false);
+
+            if (typeof _options.onMenuClose === 'function') {
+                _options.onMenuClose();
+            }
         }
     };
 
@@ -211,6 +227,9 @@ if (typeof Mozilla === 'undefined') {
             close = items[i].querySelector('.mzp-c-menu-button-close');
             close.addEventListener('click', Menu.onCloseButtonClick, false);
         }
+
+        // close with escape key
+        document.addEventListener('keyup', Menu.onDocumentKeyUp, false);
     };
 
     /**
@@ -232,6 +251,8 @@ if (typeof Mozilla === 'undefined') {
             close = items[i].querySelector('.mzp-c-menu-button-close');
             close.removeEventListener('click', Menu.onCloseButtonClick, false);
         }
+
+        document.removeEventListener('keyup', Menu.onDocumentKeyUp, false);
     };
 
     /**

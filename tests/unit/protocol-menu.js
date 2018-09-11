@@ -87,14 +87,14 @@ describe('protocol-menu.js', function() {
             item.dispatchEvent(mockEnterEvent);
             jasmine.clock().tick(200);
 
-            expect(item.classList.contains('selected')).toBeTruthy();
+            expect(item.classList.contains('is-selected')).toBeTruthy();
             expect(options.open).toHaveBeenCalled();
 
             mockLeaveEvent.initEvent('mouseleave', true, true);
             item.dispatchEvent(mockLeaveEvent);
             jasmine.clock().tick(200);
 
-            expect(item.classList.contains('selected')).toBeFalsy();
+            expect(item.classList.contains('is-selected')).toBeFalsy();
             expect(options.close).toHaveBeenCalled();
         });
 
@@ -112,7 +112,7 @@ describe('protocol-menu.js', function() {
 
             title.click();
 
-            expect(item.classList.contains('selected')).toBeTruthy();
+            expect(item.classList.contains('is-selected')).toBeTruthy();
             expect(options.open).toHaveBeenCalled();
         });
 
@@ -133,12 +133,12 @@ describe('protocol-menu.js', function() {
             item.dispatchEvent(mockEnterEvent);
             jasmine.clock().tick(200);
 
-            expect(item.classList.contains('selected')).toBeTruthy();
+            expect(item.classList.contains('is-selected')).toBeTruthy();
             expect(options.open).toHaveBeenCalled();
 
             document.querySelector('.mzp-c-menu-button-close').click();
 
-            expect(item.classList.contains('selected')).toBeFalsy();
+            expect(item.classList.contains('is-selected')).toBeFalsy();
             expect(options.buttonClose).toHaveBeenCalled();
             expect(options.close).toHaveBeenCalled();
         });
@@ -171,11 +171,11 @@ describe('protocol-menu.js', function() {
             });
 
             title.click();
-            expect(item.classList.contains('selected')).toBeTruthy();
+            expect(item.classList.contains('is-selected')).toBeTruthy();
             expect(options.open).toHaveBeenCalled();
 
             title.click();
-            expect(item.classList.contains('selected')).toBeFalsy();
+            expect(item.classList.contains('is-selected')).toBeFalsy();
             expect(options.close).toHaveBeenCalled();
         });
     });
