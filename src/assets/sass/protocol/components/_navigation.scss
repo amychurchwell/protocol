@@ -40,6 +40,16 @@
     }
 }
 
+.mzp-c-navigation-items {
+    clear: both;
+    padding-top: $spacing-sm;
+
+    @media #{$mq-md} {
+        clear: none;
+        padding-top: 0;
+    }
+}
+
 /* -------------------------------------------------------------------------- */
 // Mozilla Logo
 
@@ -58,7 +68,7 @@
     }
 
     @media #{$mq-md} {
-        margin: $spacing-lg 0;
+        @include bidi(((margin, $spacing-lg ($spacing-sm * 2) $spacing-lg 0, $spacing-lg 0 $spacing-lg ($spacing-sm * 2)),));
 
         a {
             margin-top: $spacing-sm;
@@ -66,6 +76,8 @@
     }
 
     @media #{$mq-lg} {
+        @include bidi(((margin, $spacing-lg ($spacing-md * 2) $spacing-lg 0, $spacing-lg 0 $spacing-lg ($spacing-md * 2)),));
+
         a {
             @include background-size(112px, 32px);
             height: 32px;
@@ -73,14 +85,36 @@
             width: 112px;
         }
     }
+
+    @media #{$mq-xl} {
+        @include bidi(((margin, $spacing-lg ($spacing-lg * 2) $spacing-lg 0, $spacing-lg 0 $spacing-lg ($spacing-lg * 2)),));
+    }
 }
 
 /* -------------------------------------------------------------------------- */
-// Menu & Download Button
+// Menu molecule
 
-.mzp-c-navigation-items {
-    clear: both;
-    padding-top: $spacing-sm;
+.mzp-c-navigation-menu {
+    @media #{$mq-md} {
+        @include bidi(((margin-left, -$spacing-sm, margin-right, 0),));
+        display: inline-block;
+        width: auto;
+    }
+
+    @media #{$mq-lg} {
+        @include bidi(((margin-left, -$spacing-md, margin-right, 0),));
+    }
+
+    @media #{$mq-xl} {
+        @include bidi(((margin-left, -$spacing-lg, margin-right, 0),));
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+// Download button
+
+.mzp-c-navigation-download {
+    margin: $spacing-xl 0 $spacing-lg;
 
     .mzp-c-button-download {
         margin-bottom: 0;
@@ -88,49 +122,20 @@
 
     @media #{$mq-md} {
         @include bidi((
-            (float, left, right),
-            (margin-left, $spacing-sm, margin-right, 0),
+            (float, right, left),
+            (margin, $spacing-lg 0 $spacing-lg $spacing-sm, $spacing-lg $spacing-sm $spacing-lg 0)
         ));
-        clear: none;
-        padding-top: 0;
-        width: calc(100% - (84px + #{$spacing-sm}));
-
-        .mzp-c-menu {
-            @include bidi(((float, left, right),));
-        }
-
-        .mzp-c-navigation-download {
-            display: none;
-        }
+        display: block;
+        margin: $spacing-lg 0;
+        max-width: 180px;
     }
 
     @media #{$mq-lg} {
-        @include bidi((
-            (margin-left, $spacing-md, margin-right, 0),
-        ));
-        width: calc(100% - (112px + #{$spacing-md}));
-
-        .mzp-c-menu {
-            width: calc(100% - (180px + #{$spacing-md}));
-        }
-
-        .mzp-c-navigation-download {
-            @include bidi(((float, right, left),));
-            display: block;
-            margin: $spacing-lg 0;
-            max-width: 180px;
-        }
+        @include bidi(((margin, $spacing-lg 0 $spacing-lg $spacing-md, $spacing-lg $spacing-md $spacing-lg 0),));
     }
 
     @media #{$mq-xl} {
-        @include bidi((
-            (margin-left, $spacing-lg, margin-right, 0),
-        ));
-        width: calc(100% - (112px + #{$spacing-lg}));
-
-        .mzp-c-menu {
-            width: calc(100% - (180px + #{$spacing-lg}));
-        }
+        @include bidi(((margin, $spacing-lg 0 $spacing-lg $spacing-lg, $spacing-lg $spacing-lg $spacing-lg 0),));
     }
 }
 

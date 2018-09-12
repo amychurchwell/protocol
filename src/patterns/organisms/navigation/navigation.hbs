@@ -19,16 +19,16 @@ links:
     <div class="mzp-c-navigation-container">
       <button class="mzp-c-navigation-menu-button" type="button" aria-controls="map-c-navigation-items">Menu</button>
       <div class="mzp-c-navigation-logo"><a href="https://www.mozilla.org/">Mozilla</a></div>
-      <div class="mzp-c-navigation-items" id="map-c-navigation-items">
-        <div class="mzp-c-navigation-items-container">
+      <div class="mzp-c-navigation-items" id="mzp-c-navigation-items">
+        <div class="mzp-c-navigation-download">
+          {{#embed "patterns.molecules.download-button.download-button" class="mzp-t-download-secondary"}}
+            {{#content "privacy-link"}}{{/content}}
+          {{/embed}}
+        </div>
+        <div class="mzp-c-navigation-menu">
           {{#block "menu"}}
             {{#embed "patterns.molecules.menu.menu"}}{{/embed}}
           {{/block}}
-          <div class="mzp-c-navigation-download">
-            {{#embed "patterns.molecules.download-button.download-button" class="mzp-t-download-secondary"}}
-              {{#content "privacy-link"}}{{/content}}
-            {{/embed}}
-          </div>
         </div>
       </div>
     </div>
